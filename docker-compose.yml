@@ -64,4 +64,4 @@ services:
 
 volumes:
   postgres-db:
-  # mongo-db:
+  mongo-db:
