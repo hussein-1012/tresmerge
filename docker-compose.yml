@@ -8,6 +8,15 @@ services:
       - "4000:4000"
     env_file:
       - .env
+    deploy:
+      replicas: 4
+      max_replicas_per_node: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure 
+        delay: 5s   
     depends_on:
       - postgres
       - redis
@@ -38,8 +47,7 @@ services:
     depends_on:
       - node-app
 
-  # Uncomment these services if you want to use MongoDB
-  # mongo:
+ #mongo:
   #   image: mongo:latest
   #   container_name: mongo-db-container
   #   restart: always
@@ -49,7 +57,7 @@ services:
   #   volumes:
   #     - mongo-db:/data/db
 
-  # mongo-express:
+# mongo-express:
   #   image: mongo-express:latest
   #   container_name: mongo-express-container
   #   restart: always
